@@ -4,8 +4,8 @@ ARG ALLURE_VERSION=2.7.0
 ENV ALLURE_VERSION=$ALLURE_VERSION
 
 LABEL multi.os="alpine" \
-    multi.allure-version="$ALLURE_VERSION"
-    multi.jdk="16"
+    multi.allure-version=$ALLURE_VERSION \
+    multi.jdk=16
 
 RUN apk update && \
     apk add --no-cache curl
