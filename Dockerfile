@@ -8,7 +8,7 @@ LABEL multi.os="alpine" \
     multi.jdk=16
 
 RUN apk update && \
-    apk add --no-cache curl
+    apk add --no-cache curl bash
 
 RUN curl -o allure-${ALLURE_VERSION}.tgz -Ls https://github.com/allure-framework/allure2/releases/download/${ALLURE_VERSION}/allure-${ALLURE_VERSION}.tgz && \
     tar -zxvf allure-${ALLURE_VERSION}.tgz -C /opt/ && \
