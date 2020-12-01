@@ -1,0 +1,35 @@
+version: 2.1
+executors:
+  docker-publisher:
+    environment:
+      IMAGE_NAME: oretama/allure-cli
+    docker:
+      - image: circleci/buildpack-deps:stretch
+jobs:
+  publish:
+    parameters:
+      allure-version:
+        type: string
+    executor: docker-publisher
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build Docker image
+          command: |
+            docker build --build-arg ALLURE_VERSION=<< parameters.allure-version >> -t $IMAGE_NAME:<< parameters.allure-version >>-alpine .
+      - run:
+          name: Publish Docker Image to Docker Hub
+          command: |
+            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker push $IMAGE_NAME:<< parameters.allure-version >>-alpine
+workflows:
+  pulish-flow:
+    jobs:
+      - publish:
+          matrix:
+            parameters:
+              allure-version: ["2.7.0" ]
+          filters:
+            branches:
+              only: master
