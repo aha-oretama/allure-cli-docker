@@ -29,7 +29,7 @@ workflows:
       - publish:
           matrix:
             parameters:
-              allure-version: ["2.5.0", "2.6.0", "2.7.0" ]
+              allure-version: ["2.11.0", "2.12.1", "2.13.7" ]
           filters:
             branches:
               only: main
