@@ -32,4 +32,4 @@ workflows:
               allure-version: ["2.7.0" ]
           filters:
             branches:
-              only: master
+              only: main
